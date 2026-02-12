@@ -1,15 +1,15 @@
-# 🎓 Virtual Career Counselor (AWS Capstone Project)
+# Virtual Career Counselor (AWS Capstone Project)
 
 Hi! This is my **AWS Capstone Project**. I built a Virtual Career Counselor that uses Cloud Computing and Artificial Intelligence to help students figure out their career paths. Instead of just giving generic advice, it builds a custom roadmap based on specific user goals and skills.
 
-## 📺 See it in Action
+## See it in Action
 I've recorded a full **9:35 minute** demo where I walk through the code, show the AWS console setup, and demonstrate the live app working. You can watch it here:
 
 [**Watch the Project Demo on Google Drive**](https://drive.google.com/file/d/1lrXyCzKcRbUhs4qh9GSJSLVm9IrNJtjJ/view?usp=sharing)
 
 ---
 
-## 📂 What's in this Repository?
+## What's in this Repository?
 I've organized the workspace so everything is easy to find for the project submission:
 
 * **`AWS_Capstone_Project`**: This is the heart of the project. It contains the Flask backend (`app_aws.py`), all the HTML pages, and the CSS for the styling.
@@ -18,7 +18,7 @@ I've organized the workspace so everything is easy to find for the project submi
 
 ---
 
-## 💻 How I Built It (The Tech Stack)
+## How I Built It (The Tech Stack)
 I wanted to use industry-standard tools to make this project as robust as possible:
 
 * **The Brain (AI):** I used the **Groq Cloud API (Llama-3.3-70b)**. It's incredibly fast at generating step-by-step career roadmaps based on user prompts.
@@ -29,7 +29,7 @@ I wanted to use industry-standard tools to make this project as robust as possib
 
 ---
 
-## 🚀 How to Run it Locally
+## How to Run it Locally
 1. Clone this repo to your machine.
 2. Install the requirements: `pip install -r requirements.txt`.
 3. Ensure your AWS environment is configured (or use an IAM role if running on EC2).

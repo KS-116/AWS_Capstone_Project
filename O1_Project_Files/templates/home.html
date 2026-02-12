@@ -70,17 +70,17 @@
         
         if (!message) return;
 
-        // 1. Append User Message
+        
         appendMessage('U', message, 'user');
         input.value = '';
 
-        // 2. Show Loading Bubble at the bottom
+        
         container.appendChild(loader);
         loader.classList.remove('hidden');
         container.scrollTop = container.scrollHeight;
 
         try {
-            // 3. Call your Flask API
+            
             const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -89,7 +89,7 @@
 
             const data = await response.json();
             
-            // 4. Hide Loader and Append AI Response
+            
             loader.classList.add('hidden');
             appendMessage('AI', data.response, 'ai');
         } catch (error) {
@@ -120,7 +120,7 @@
         container.scrollTop = container.scrollHeight;
     }
 
-    // Enter key support
+    
     document.getElementById('chatInput').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') sendChatMessage();
     });

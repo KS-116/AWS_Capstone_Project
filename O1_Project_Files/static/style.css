@@ -1,7 +1,5 @@
-/* Midnight Intelligence Theme - Custom Styles */
-
 @layer components {
-    /* Glass Morphism Card */
+    
     .glass-card {
         @apply rounded-xl border border-[#00d4ff]/20 bg-white/5 backdrop-blur-md 
                shadow-lg shadow-[#00d4ff]/10 transition-all duration-300;
@@ -11,17 +9,17 @@
         @apply border-[#00d4ff]/50 shadow-xl shadow-[#00d4ff]/20;
     }
 
-    /* Gradient Text */
+    
     .gradient-text {
         @apply bg-gradient-to-r from-[#00d4ff] to-[#0099cc] bg-clip-text text-transparent;
     }
 
-    /* Neon Glow Effect */
+    
     .neon-glow {
         @apply text-[#00d4ff] drop-shadow-lg drop-shadow-[#00d4ff]/50;
     }
 
-    /* Button Styles */
+    
     .btn-primary {
         @apply px-6 py-3 rounded-lg bg-gradient-to-r from-[#00d4ff] to-[#0099cc] 
                hover:shadow-lg hover:shadow-[#00d4ff]/50 transition-all duration-300 
@@ -33,14 +31,14 @@
                transition-colors duration-300 font-semibold cursor-pointer;
     }
 
-    /* Input Styling */
+    
     .input-field {
         @apply w-full bg-[#1a1f3a] border border-[#00d4ff]/30 rounded-lg px-4 py-3 
                text-white placeholder-gray-500 focus:outline-none focus:border-[#00d4ff] 
                focus:shadow-lg focus:shadow-[#00d4ff]/20 transition-all duration-300;
     }
 
-    /* Skill Bar */
+    
     .skill-bar {
         @apply w-full h-2 rounded-full bg-[#1a1f3a] border border-[#00d4ff]/20 overflow-hidden;
     }
@@ -49,7 +47,7 @@
         @apply h-full bg-gradient-to-r from-[#00d4ff] to-[#0099cc] rounded-full transition-all duration-700;
     }
 
-    /* Message Bubble */
+    
     .message-bubble {
         @apply glass-card p-4 rounded-lg max-w-xs;
     }
@@ -62,7 +60,7 @@
         @apply mr-auto ml-0;
     }
 
-    /* Sidebar Active State */
+    
     .sidebar-item.active {
         @apply border-l-4 border-[#00d4ff] bg-[#00d4ff]/10;
     }
@@ -71,7 +69,7 @@
         @apply bg-[#00d4ff]/5 transition-colors;
     }
 
-    /* Animations */
+    
     @keyframes fade-in {
         from {
             opacity: 0;
@@ -131,7 +129,7 @@
     }
 }
 
-/* Base Styles */
+
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -149,7 +147,7 @@
     background: rgba(0, 212, 255, 0.5);
 }
 
-/* Toast Styles */
+
 .toast {
     @apply fixed bottom-6 right-6 glass-card px-6 py-4 rounded-lg max-w-sm 
            shadow-xl shadow-[#00d4ff]/30 flex items-center gap-3 animate-slide-in-right;
@@ -175,7 +173,7 @@
     @apply text-sm font-semibold;
 }
 
-/* Timeline Styles */
+
 .timeline-item {
     @apply flex gap-4 relative pb-8;
 }
@@ -194,12 +192,12 @@
            flex items-center justify-center text-[#0a0e27] font-bold text-xs flex-shrink-0;
 }
 
-/* Dashboard Sidebar */
+
 .sidebar-wrapper {
     @apply bg-[#0f1535]/50 backdrop-blur-md border-r border-[#00d4ff]/20;
 }
 
-/* Feature Cards */
+
 .feature-card {
     @apply glass-card p-8 hover:border-[#00d4ff] transition-all duration-300;
 }
@@ -209,14 +207,14 @@
            flex items-center justify-center text-2xl flex-shrink-0;
 }
 
-/* Responsive Text Balance */
+
 @supports (text-wrap: balance) {
     h1, h2, h3, h4, h5, h6 {
         text-wrap: balance;
     }
 }
 
-/* Loading Animation */
+
 @keyframes shimmer {
     0%, 100% {
         opacity: 0.5;
@@ -230,17 +228,17 @@
     animation: shimmer 2s infinite;
 }
 
-/* Form Error State */
+
 .input-error {
     @apply border-red-500/50 focus:shadow-lg focus:shadow-red-500/20;
 }
 
-/* Success State */
+
 .input-success {
     @apply border-green-500/50 focus:shadow-lg focus:shadow-green-500/20;
 }
 
-/* Makes the asterisk lists look like nice action chips */
+
 #chatContainer ul {
     list-style: none;
     padding: 0;

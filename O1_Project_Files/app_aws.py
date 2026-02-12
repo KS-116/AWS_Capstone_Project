@@ -6,21 +6,19 @@ from groq import Groq
 app = Flask(__name__)
 app.secret_key = "career_counselor_secret_key"
 
-# --- 1. AWS CLOUD CONFIGURATION ---
-# Removed LocalStack endpoint and hardcoded keys
-# Boto3 will automatically use the permissions from 'custom_user_role'
-REGION_NAME = "us-east-1" # Ensure this matches your EC2 region
+
+REGION_NAME = "us-east-1" 
 
 dynamodb = boto3.resource('dynamodb', region_name=REGION_NAME)
 users_table = dynamodb.Table('Users')
 
-# Initialize SNS Client for Requirement #3
+
 sns_client = boto3.client('sns', region_name=REGION_NAME)
 SNS_TOPIC_ARN = "arn:aws:sns:us-east-1:366256583005:CarrerNotifications"
 
 GROQ_CLIENT = Groq(api_key="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")
 
-# --- 2. UTILS ---
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -46,7 +44,7 @@ def get_user_data(username):
         print(f"DynamoDB Error: {e}")
         return {}
 
-# NEW: SNS Alert function
+
 def send_sns_notification(username, action):
     try:
         message = f"User {username} has performed: {action}"
@@ -58,7 +56,7 @@ def send_sns_notification(username, action):
     except Exception as e:
         print(f"SNS Error: {e}")
 
-# --- 3. ROUTES ---
+
 
 @app.route('/')
 def index():
@@ -80,7 +78,7 @@ def signup():
                 },
                 ConditionExpression='attribute_not_exists(username)'
             )
-            # Notify admin of new registration
+            
             send_sns_notification(username, f"Registered as {role}")
             flash(f"{role.capitalize()} account created!", "success")
             return redirect(url_for('login'))
@@ -141,7 +139,7 @@ def setup_goal():
                 ':s': data['skills'], ':t': data['target_goal']
             }
         )
-        # Notify of goal update
+       
         send_sns_notification(username, f"Updated target to {data['target_goal']}")
         return redirect(url_for('dashboard'))
     return render_template('setup_goal.html', user=get_user_data(username))

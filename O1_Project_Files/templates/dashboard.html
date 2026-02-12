@@ -92,7 +92,7 @@
 </section>
 
 <style>
-    /* Styling for the Roadmap Markdown Output */
+    
     .roadmap-container {
         font-family: 'Inter', sans-serif;
         line-height: 1.8;
@@ -132,9 +132,7 @@
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-/**
- * Ensures existing roadmap is parsed on page load
- */
+
 document.addEventListener('DOMContentLoaded', () => {
     const display = document.getElementById('roadmapDisplay');
     if (display && (display.innerText.includes('#') || display.innerText.includes('*'))) {
@@ -142,9 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-/**
- * Async function to call Groq API and update UI
- */
+
 async function generateRoadmap() {
     const btn = document.getElementById('roadmapBtn');
     const display = document.getElementById('roadmapDisplay');

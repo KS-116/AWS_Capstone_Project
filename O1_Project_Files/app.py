@@ -9,15 +9,12 @@ from functools import wraps
 app = Flask(__name__)
 app.secret_key = 'career_counselor_2026_secure_key'
 
-# Configuration for File Uploads
+
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# ---------------------------------------------------------
-# 1. AWS BEDROCK SETUP
-# ---------------------------------------------------------
-# Ensure your AWS credentials are set up via AWS Educate/IAM
+
 bedrock = boto3.client(service_name='bedrock-runtime', region_name='us-east-1')
 
 def get_counselor_response(user_message, career_goal="General"):
@@ -40,17 +37,13 @@ def get_counselor_response(user_message, career_goal="General"):
     except Exception as e:
         return f"AI Connection Error: {str(e)}"
 
-# ---------------------------------------------------------
-# 2. DATA STORAGE (In-Memory for MVP)
-# ---------------------------------------------------------
-users = {} # Stores {username: hashed_password}
+
+users = {} 
 admin_users = {"admin": generate_password_hash("admin123")}
 projects = []  
 enrollments = {} 
 
-# ---------------------------------------------------------
-# 3. HELPERS & DECORATORS
-# ---------------------------------------------------------
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -60,9 +53,7 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-# ---------------------------------------------------------
-# 4. USER ROUTES
-# ---------------------------------------------------------
+
 
 @app.route('/')
 def index():
@@ -100,9 +91,7 @@ def home():
     my_projects = [p for p in projects if p['id'] in user_enrollments_ids]
     return render_template('home.html', username=username, my_projects=my_projects)
 
-# ---------------------------------------------------------
-# 5. AI CHATBOT ROUTE
-# ---------------------------------------------------------
+
 @app.route('/api/chat', methods=['POST'])
 @login_required
 def chat():
@@ -112,9 +101,7 @@ def chat():
     ai_reply = get_counselor_response(user_msg, goal)
     return jsonify({"response": ai_reply})
 
-# ---------------------------------------------------------
-# 6. ADMIN & PROJECT ROUTES
-# ---------------------------------------------------------
+
 
 @app.route('/admin/dashboard')
 def admin_dashboard():
@@ -126,7 +113,7 @@ def admin_dashboard():
 def admin_create_project():
     if 'admin' not in session: return redirect(url_for('admin_login'))
     if request.method == 'POST':
-        # Same logic as your sample but improved ID handling
+        
         project_id = len(projects) + 1
         new_project = {
             'id': project_id,

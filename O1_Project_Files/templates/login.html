@@ -117,7 +117,7 @@
 
 {% block scripts %}
 <script>
-    // Auto-hide flash messages
+    
     setTimeout(() => {
         const flashContainer = document.getElementById('flash-container');
         if (flashContainer) {
@@ -130,7 +130,7 @@
     function handleDemoLogin(event) {
         document.getElementById('username').value = 'KS116';
         document.getElementById('password').value = 'password123';
-        // Ensure student role is selected for the demo
+        
         document.querySelector('input[name="role"][value="student"]').checked = true;
         
         const demoBtn = event.target;
