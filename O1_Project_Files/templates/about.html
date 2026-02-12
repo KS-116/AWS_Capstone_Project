@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}About - Career Counselor AI{% endblock %}
+
+{% block content %}
+<section class="min-h-screen pt-24 pb-12 px-6 bg-[#0a0e27] text-white">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+            <h1 class="text-4xl font-extrabold tracking-tight mb-4">
+                About the <span class="text-[#00d4ff]">Virtual Career Counselor</span>
+            </h1>
+            <p class="text-gray-400 max-w-2xl mx-auto">
+                An intelligent system leveraging Generative AI and Cloud Computing to bridge the gap between education and industry.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <div class="glass-card p-8 border-t-2 border-[#00d4ff]">
+                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <span class="text-[#00d4ff]">🤖</span> Generative AI (Groq)
+                </h3>
+                <p class="text-sm text-gray-400 leading-relaxed">
+                    The core intelligence is powered by <strong>Llama-3.3-70b</strong> via the Groq API. This enables high-speed, 
+                    context-aware career roadmaps and real-time skill gap analysis based on 2026 industry standards.
+                </p>
+            </div>
+
+            <div class="glass-card p-8 border-t-2 border-yellow-500">
+                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                    <span class="text-yellow-500">☁️</span> AWS Cloud Infrastructure
+                </h3>
+                <p class="text-sm text-gray-400 leading-relaxed">
+                    User data, including profile details and AI-generated roadmaps, are persisted using <strong>AWS DynamoDB</strong> 
+                    . This ensures a secure and scalable serverless architecture.
+                </p>
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            <h2 class="text-2xl font-bold border-b border-white/10 pb-2 mb-6">Key Functionalities</h2>
+            
+            <div class="flex gap-4 items-start">
+                <div class="mt-1 text-[#00d4ff] text-xl">✔</div>
+                <div>
+                    <h4 class="font-bold">Intelligent Roadmap Generation</h4>
+                    <p class="text-sm text-gray-400">Creates a personalized, phase-by-phase learning journey tailored to your specific goals and skills.</p>
+                </div>
+            </div>
+
+            <div class="flex gap-4 items-start">
+                <div class="mt-1 text-[#00d4ff] text-xl">✔</div>
+                <div>
+                    <h4 class="font-bold">Real-time Skill Gap Analysis</h4>
+                    <p class="text-sm text-gray-400">Dynamically compares your current skill set with live industry requirements to identify critical learning needs.</p>
+                </div>
+            </div>
+
+            <div class="flex gap-4 items-start">
+                <div class="mt-1 text-[#00d4ff] text-xl">✔</div>
+                <div>
+                    <h4 class="font-bold">AI Career Mentorship Chat</h4>
+                    <p class="text-sm text-gray-400">A conversational interface that provides instant answers to complex career and education queries.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-20 p-8 rounded-2xl bg-white/5 border border-white/10 text-center">
+            <p class="text-xs text-gray-500 uppercase tracking-widest mb-2">Developed As</p>
+            <h4 class="text-lg font-bold">Final Year Capstone Project</h4>
+            <p class="text-sm text-gray-400 mt-2">Integrating Artificial Intelligence and Cloud Systems for Personalized Education Pathways.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerAI - AI-Powered Career Guidance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Poppins', sans-serif; font-weight: 700; }
+        :root {
+            --primary-dark: #0a0e27;
+            --secondary-dark: #0f1535;
+            --card-bg: rgba(30, 41, 82, 0.4);
+            --neon-blue: #00d4ff;
+            --neon-blue-dark: #0099ff;
+            --text-primary: #f0f4f8;
+            --border-color: rgba(0, 212, 255, 0.1);
+        }
+        body {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+        }
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px) saturate(180%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        .neon-glow { color: var(--neon-blue); text-shadow: 0 0 10px rgba(0, 212, 255, 0.3); }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-blue-dark) 100%);
+            color: var(--primary-dark);
+            font-weight: 600;
+            padding: 10px 24px;
+            border-radius: 8px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            padding: 10px 24px;
+            border-radius: 8px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(0, 212, 255, 0.3); }
+    </style>
+</head>
+<body>
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-card backdrop-blur-md" style="background: rgba(10, 14, 39, 0.7);">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
+                    <span class="text-white font-bold">AI</span>
+                </div>
+                <span class="text-xl font-bold neon-glow">CareerAI</span>
+            </div>
+            
+            <div class="flex items-center gap-3 sm:gap-6">
+                <a href="{{ url_for('index') }}" class="text-gray-300 hover:text-white">Home</a>
+                <a href="{{ url_for('login') }}" class="btn-secondary text-sm">Login</a>
+                <a href="{{ url_for('signup') }}" class="btn-primary text-sm">Signup</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="pt-40 pb-20 px-6 relative">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                Your AI Career <span class="neon-glow">Compass</span>
+            </h1>
+            <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+                Personalized roadmaps, skill gap analysis, and real-time guidance from advanced AI mentors.
+            </p>
+            <div class="flex gap-4 justify-center">
+                <a href="{{ url_for('signup') }}" class="btn-primary text-lg px-10 py-4">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+            <div class="glass-card p-8">
+                <div class="text-3xl mb-4">🎯</div>
+                <h3 class="text-xl font-bold mb-2">AI Roadmaps</h3>
+                <p class="text-gray-400">Step-by-step paths tailored to your specific career goals.</p>
+            </div>
+            <div class="glass-card p-8">
+                <div class="text-3xl mb-4">📊</div>
+                <h3 class="text-xl font-bold mb-2">Gap Analysis</h3>
+                <p class="text-gray-400">Identifies exactly what skills you're missing for your dream job.</p>
+            </div>
+            <div class="glass-card p-8">
+                <div class="text-3xl mb-4">💬</div>
+                <h3 class="text-xl font-bold mb-2">AI Mentor</h3>
+                <p class="text-gray-400">Real-time chat support for career questions and advice.</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,260 @@
+/* Midnight Intelligence Theme - Custom Styles */
+
+@layer components {
+    /* Glass Morphism Card */
+    .glass-card {
+        @apply rounded-xl border border-[#00d4ff]/20 bg-white/5 backdrop-blur-md 
+               shadow-lg shadow-[#00d4ff]/10 transition-all duration-300;
+    }
+
+    .glass-card:hover {
+        @apply border-[#00d4ff]/50 shadow-xl shadow-[#00d4ff]/20;
+    }
+
+    /* Gradient Text */
+    .gradient-text {
+        @apply bg-gradient-to-r from-[#00d4ff] to-[#0099cc] bg-clip-text text-transparent;
+    }
+
+    /* Neon Glow Effect */
+    .neon-glow {
+        @apply text-[#00d4ff] drop-shadow-lg drop-shadow-[#00d4ff]/50;
+    }
+
+    /* Button Styles */
+    .btn-primary {
+        @apply px-6 py-3 rounded-lg bg-gradient-to-r from-[#00d4ff] to-[#0099cc] 
+               hover:shadow-lg hover:shadow-[#00d4ff]/50 transition-all duration-300 
+               font-semibold cursor-pointer;
+    }
+
+    .btn-secondary {
+        @apply px-6 py-3 rounded-lg border border-[#00d4ff] hover:bg-[#00d4ff]/10 
+               transition-colors duration-300 font-semibold cursor-pointer;
+    }
+
+    /* Input Styling */
+    .input-field {
+        @apply w-full bg-[#1a1f3a] border border-[#00d4ff]/30 rounded-lg px-4 py-3 
+               text-white placeholder-gray-500 focus:outline-none focus:border-[#00d4ff] 
+               focus:shadow-lg focus:shadow-[#00d4ff]/20 transition-all duration-300;
+    }
+
+    /* Skill Bar */
+    .skill-bar {
+        @apply w-full h-2 rounded-full bg-[#1a1f3a] border border-[#00d4ff]/20 overflow-hidden;
+    }
+
+    .skill-bar-fill {
+        @apply h-full bg-gradient-to-r from-[#00d4ff] to-[#0099cc] rounded-full transition-all duration-700;
+    }
+
+    /* Message Bubble */
+    .message-bubble {
+        @apply glass-card p-4 rounded-lg max-w-xs;
+    }
+
+    .message-bubble.user {
+        @apply ml-auto mr-0 bg-gradient-to-r from-[#00d4ff]/20 to-[#0099cc]/20 border-[#00d4ff]/40;
+    }
+
+    .message-bubble.ai {
+        @apply mr-auto ml-0;
+    }
+
+    /* Sidebar Active State */
+    .sidebar-item.active {
+        @apply border-l-4 border-[#00d4ff] bg-[#00d4ff]/10;
+    }
+
+    .sidebar-item:hover {
+        @apply bg-[#00d4ff]/5 transition-colors;
+    }
+
+    /* Animations */
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slide-in-right {
+        from {
+            opacity: 0;
+            transform: translateX(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slide-in-left {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes pulse-glow {
+        0%, 100% {
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+        50% {
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.6);
+        }
+    }
+
+    .animate-fade-in {
+        @apply animate-in fade-in duration-500;
+    }
+
+    .animate-slide-in-right {
+        animation: slide-in-right 0.5s ease-out;
+    }
+
+    .animate-slide-in-left {
+        animation: slide-in-left 0.5s ease-out;
+    }
+
+    .animate-pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+    }
+}
+
+/* Base Styles */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 212, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 212, 255, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 212, 255, 0.5);
+}
+
+/* Toast Styles */
+.toast {
+    @apply fixed bottom-6 right-6 glass-card px-6 py-4 rounded-lg max-w-sm 
+           shadow-xl shadow-[#00d4ff]/30 flex items-center gap-3 animate-slide-in-right;
+}
+
+.toast.success {
+    @apply border-[#00d4ff]/50 bg-[#00d4ff]/10;
+}
+
+.toast.error {
+    @apply border-red-500/50 bg-red-500/10;
+}
+
+.toast.info {
+    @apply border-blue-500/50 bg-blue-500/10;
+}
+
+.toast-icon {
+    @apply text-xl flex-shrink-0;
+}
+
+.toast-message {
+    @apply text-sm font-semibold;
+}
+
+/* Timeline Styles */
+.timeline-item {
+    @apply flex gap-4 relative pb-8;
+}
+
+.timeline-item:last-child {
+    @apply pb-0;
+}
+
+.timeline-item::before {
+    content: '';
+    @apply absolute left-4 top-12 w-0.5 h-full bg-gradient-to-b from-[#00d4ff] to-transparent;
+}
+
+.timeline-dot {
+    @apply w-8 h-8 rounded-full bg-gradient-to-br from-[#00d4ff] to-[#0099cc] 
+           flex items-center justify-center text-[#0a0e27] font-bold text-xs flex-shrink-0;
+}
+
+/* Dashboard Sidebar */
+.sidebar-wrapper {
+    @apply bg-[#0f1535]/50 backdrop-blur-md border-r border-[#00d4ff]/20;
+}
+
+/* Feature Cards */
+.feature-card {
+    @apply glass-card p-8 hover:border-[#00d4ff] transition-all duration-300;
+}
+
+.feature-icon {
+    @apply w-12 h-12 rounded-lg bg-gradient-to-br from-[#00d4ff] to-[#0099cc] 
+           flex items-center justify-center text-2xl flex-shrink-0;
+}
+
+/* Responsive Text Balance */
+@supports (text-wrap: balance) {
+    h1, h2, h3, h4, h5, h6 {
+        text-wrap: balance;
+    }
+}
+
+/* Loading Animation */
+@keyframes shimmer {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.animate-shimmer {
+    animation: shimmer 2s infinite;
+}
+
+/* Form Error State */
+.input-error {
+    @apply border-red-500/50 focus:shadow-lg focus:shadow-red-500/20;
+}
+
+/* Success State */
+.input-success {
+    @apply border-green-500/50 focus:shadow-lg focus:shadow-green-500/20;
+}
+
+/* Makes the asterisk lists look like nice action chips */
+#chatContainer ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+#chatContainer li {
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    display: inline-block;
+    margin-right: 5px;
+    font-size: 0.85rem;
+    color: #00d4ff;
+}

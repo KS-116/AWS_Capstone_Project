@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up - Virtual Career Counselor{% endblock %}
+
+{% block content %}
+<section class="min-h-screen flex items-center justify-center px-6">
+    <div class="w-full max-w-md">
+        
+        <div id="flash-container" class="mb-6 space-y-4">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="p-4 rounded-lg border flex items-center gap-3 animate-pulse 
+                            {% if category == 'success' %}
+                                bg-green-500/10 border-green-500/50 text-green-400
+                            {% else %}
+                                bg-red-500/10 border-red-500/50 text-red-400
+                            {% endif %}">
+                            <span class="text-xl">
+                                {% if category == 'success' %} ✓ {% else %} ⚠ {% endif %}
+                            </span>
+                            <p class="font-medium text-sm">{{ message }}</p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold mb-3 bg-gradient-to-r from-[#00d4ff] to-[#0099cc] bg-clip-text text-transparent">
+                Create Account
+            </h1>
+            <p class="text-gray-400">Join the AI-powered career platform</p>
+        </div>
+
+        <form class="glass-card p-8 space-y-6" action="{{ url_for('signup') }}" method="POST">
+            
+            <div class="space-y-3">
+                <label class="block text-sm font-semibold mb-2 text-gray-300">I want to join as a:</label>
+                <div class="flex gap-4">
+                    <label class="flex-1 cursor-pointer">
+                        <input type="radio" name="role" value="student" checked class="hidden peer">
+                        <div class="p-4 text-center border border-[#00d4ff]/20 rounded-xl text-xs transition-all 
+                                    peer-checked:border-[#00d4ff] peer-checked:bg-[#00d4ff]/10 peer-checked:text-[#00d4ff] hover:bg-white/5">
+                            <div class="text-lg mb-1">🎓</div>
+                            Student
+                        </div>
+                    </label>
+                    <label class="flex-1 cursor-pointer">
+                        <input type="radio" name="role" value="admin" class="hidden peer">
+                        <div class="p-4 text-center border border-[#00d4ff]/10 rounded-xl text-xs transition-all 
+                                    peer-checked:[#00d4ff] peer-checked:bg-[#00d4ff]/10 peer-checked:text-[#00d4ff] hover:bg-white/5">
+                            <div class="text-lg mb-1">🛡️</div>
+                            Admin
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label for="username" class="block text-sm font-semibold mb-2">Username</label>
+                <input 
+                    id="username" 
+                    type="text" 
+                    name="username"
+                    placeholder="Choose a username" 
+                    required
+                    class="w-full bg-[#1a1f3a] border border-[#00d4ff]/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#00d4ff] transition-colors"
+                >
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-semibold mb-2">Password</label>
+                <input 
+                    id="password" 
+                    type="password" 
+                    name="password"
+                    placeholder="••••••••" 
+                    required
+                    class="w-full bg-[#1a1f3a] border border-[#00d4ff]/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#00d4ff] transition-colors"
+                >
+            </div>
+
+            <button 
+                type="submit" 
+                class="w-full py-4 rounded-xl bg-gradient-to-r from-[#00d4ff] to-[#0099cc] hover:shadow-lg hover:shadow-[#00d4ff]/50 transition-all font-bold text-white uppercase tracking-widest text-xs"
+            >
+                Create My Account
+            </button>
+        </form>
+
+        <div class="text-center mt-8">
+            <p class="text-gray-400 text-sm">
+                Already have an account? 
+                <a href="{{ url_for('login') }}" class="text-[#00d4ff] hover:underline font-semibold transition-colors">
+                    Log in here
+                </a>
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Auto-hide flash messages
+    setTimeout(() => {
+        const flashContainer = document.getElementById('flash-container');
+        if (flashContainer) {
+            flashContainer.style.transition = 'opacity 0.5s ease';
+            flashContainer.style.opacity = '0';
+            setTimeout(() => flashContainer.remove(), 500);
+        }
+    }, 5000);
+</script>
+{% endblock %}

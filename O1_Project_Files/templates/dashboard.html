@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Career Counselor{% endblock %}
+
+{% block content %}
+<section class="min-h-screen pt-24 pb-12 px-6 bg-[#0a0e27] text-white">
+    <div class="max-w-6xl mx-auto">
+        
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight">Career <span class="text-[#00d4ff]">Intelligence</span> Dashboard</h1>
+                <p class="text-gray-400 mt-1">Strategic analysis for <span class="text-white font-semibold">{{ user.username }}</span></p>
+            </div>
+            <div class="flex gap-3">
+                <a href="{{ url_for('home') }}" class="px-4 py-2 bg-[#00d4ff] text-[#0a0e27] font-bold rounded-lg hover:opacity-90 transition-all text-sm shadow-[0_0_15px_rgba(0,212,255,0.3)]">Back to Chat</a>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="space-y-6">
+                <div class="glass-card p-6 border-l-4 border-[#00d4ff]">
+                    <h3 class="text-[10px] font-bold text-gray-500 uppercase mb-4 tracking-[0.2em]">Current Standing</h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex justify-between border-b border-white/5 pb-2">
+                            <span class="text-gray-400">Target:</span>
+                            <span class="text-[#00d4ff] font-bold">{{ user.target_goal or 'Data Analyst' }}</span>
+                        </div>
+                        <div class="flex justify-between border-b border-white/5 pb-2">
+                            <span class="text-gray-400">Institution:</span>
+                            <span class="text-gray-200 text-right text-xs">Jaypee University of IT</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">CGPA:</span>
+                            <span class="text-green-400 font-mono">{{ user.cgpa or '8.9' }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 border-t-4 border-yellow-500">
+                    <h3 class="font-bold mb-4 flex items-center gap-2 text-yellow-500">
+                        <span>⚡</span> AI Skill Analysis
+                    </h3>
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-[10px] text-gray-500 uppercase mb-3 font-black tracking-widest">Industry Alignment</p>
+                            <div class="flex flex-wrap gap-2">
+                                {% for s in matching_skills %}
+                                <span class="px-2 py-1 bg-green-500/10 text-green-400 border border-green-500/20 rounded-md text-[10px] font-bold uppercase">✓ {{ s }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-gray-500 uppercase mb-3 font-black tracking-widest">Critical Gaps</p>
+                            <div class="flex flex-wrap gap-2">
+                                {% for s in missing_skills %}
+                                <span class="px-2 py-1 bg-red-500/10 text-red-400 border border-red-500/20 rounded-md text-[10px] font-bold uppercase">+ {{ s }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2">
+                <div class="glass-card p-8 min-h-[600px] flex flex-col relative overflow-hidden">
+                    <div class="flex justify-end items-start mb-8">
+                        <button onclick="generateRoadmap()" id="roadmapBtn" class="bg-[#00d4ff] text-[#0a0e27] text-[10px] font-black px-6 py-3 rounded-full hover:shadow-[0_0_25px_rgba(0,212,255,0.4)] transition-all uppercase tracking-tighter">
+                            Generate Roadmap
+                        </button>
+                    </div>
+
+                    <div id="roadmapDisplay" class="roadmap-container relative space-y-6 text-gray-300">
+                        {% if user.roadmap_text %}
+                            <div class="roadmap-styled-content text-gray-300 leading-relaxed text-sm">
+                                {{ user.roadmap_text | safe }}
+                            </div>
+                        {% else %}
+                            <div class="flex flex-col items-center justify-center h-full text-center py-20">
+                                <div class="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mb-6 border border-white/10">
+                                    <svg class="w-10 h-10 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
+                                </div>
+                                <p class="text-gray-500 italic max-w-xs mx-auto">Click 'Generate Roadmap' to architect your career path using Llama-3.3.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Styling for the Roadmap Markdown Output */
+    .roadmap-container {
+        font-family: 'Inter', sans-serif;
+        line-height: 1.8;
+    }
+    .roadmap-container h2, .roadmap-container h3, .roadmap-container strong {
+        display: block;
+        color: #00d4ff;
+        font-size: 1.1rem;
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+        padding-bottom: 8px;
+    }
+    .roadmap-container ul {
+        list-style-type: none;
+        padding-left: 0;
+        margin-bottom: 1.5rem;
+    }
+    .roadmap-container li {
+        margin-bottom: 0.75rem;
+        position: relative;
+        padding-left: 1.5rem;
+        color: #d1d5db;
+    }
+    .roadmap-container li::before {
+        content: "→";
+        position: absolute;
+        left: 0;
+        color: #00d4ff;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+/**
+ * Ensures existing roadmap is parsed on page load
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    const display = document.getElementById('roadmapDisplay');
+    if (display && (display.innerText.includes('#') || display.innerText.includes('*'))) {
+        display.innerHTML = `<div class="roadmap-container">${marked.parse(display.innerText)}</div>`;
+    }
+});
+
+/**
+ * Async function to call Groq API and update UI
+ */
+async function generateRoadmap() {
+    const btn = document.getElementById('roadmapBtn');
+    const display = document.getElementById('roadmapDisplay');
+    
+    if (!btn || !display) return;
+
+    btn.innerText = "Architecting...";
+    btn.disabled = true;
+    
+    display.innerHTML = `
+        <div class="flex flex-col items-center justify-center h-full py-20 space-y-6">
+            <div class="flex gap-3">
+                <div class="w-3 h-3 bg-[#00d4ff] rounded-full animate-bounce"></div>
+                <div class="w-3 h-3 bg-[#00d4ff] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                <div class="w-3 h-3 bg-[#00d4ff] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+            </div>
+            <p class="text-[#00d4ff] text-[10px] font-black uppercase tracking-[0.3em] animate-pulse">Syncing with Llama-3.3-70B</p>
+        </div>
+    `;
+
+    try {
+        const response = await fetch('/generate-roadmap', { method: 'POST' });
+        const data = await response.json();
+        
+        if (data.success) {
+            display.innerHTML = `<div class="roadmap-container">${marked.parse(data.roadmap)}</div>`;
+            btn.innerText = "Generate Roadmap";
+        } else {
+            display.innerHTML = `<p class="text-red-400">Error: ${data.error}</p>`;
+            btn.innerText = "Generate Roadmap";
+        }
+    } catch (error) {
+        display.innerHTML = `<p class="text-red-400">Network connection error.</p>`;
+        btn.innerText = "Generate Roadmap";
+    } finally {
+        btn.disabled = false;
+    }
+}
+</script>
+{% endblock %}

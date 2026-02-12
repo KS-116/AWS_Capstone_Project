@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Home - AI Counselor{% endblock %}
+
+{% block content %}
+<section class="min-h-screen pt-24 pb-10 px-6 flex flex-col items-center">
+    <div class="text-center mb-8">
+        <h1 class="text-4xl font-bold mb-4">Chat with Your <span class="text-[#00d4ff]">AI Counselor</span></h1>
+        <p class="text-gray-400 max-w-lg mx-auto">
+            Welcome, <span class="font-bold text-white">{{ user.username }}</span>. 
+            Discuss roadmaps for <span class="text-yellow-400">{{ user.target_goal or 'your career' }}</span>.
+        </p>
+    </div>
+
+    <div class="w-full max-w-4xl glass-card flex flex-col h-[600px] overflow-hidden border border-[#00d4ff]/20">
+        
+        <div id="chatContainer" class="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide">
+            <div class="flex justify-start">
+                <div class="flex gap-3 max-w-[80%]">
+                    <div class="w-8 h-8 rounded-full bg-[#00d4ff] flex items-center justify-center text-xs font-bold shrink-0 text-[#0a0e27]">AI</div>
+                    <div class="bg-[#1a1f3a] p-4 rounded-2xl rounded-tl-none border border-white/5 text-sm leading-relaxed text-gray-200">
+                        Hi! I'm your AI Mentor. I see your goal is currently <span class="text-[#00d4ff] font-bold">{{ user.target_goal or 'not set' }}</span>. 
+                        How can I help you progress toward this today?
+                    </div>
+                </div>
+            </div>
+
+            <div id="loadingIndicator" class="hidden flex justify-start mb-4">
+                <div class="flex gap-3 max-w-[80%]">
+                    <div class="w-8 h-8 rounded-full bg-[#00d4ff] flex items-center justify-center text-xs font-bold shrink-0 text-[#0a0e27]">AI</div>
+                    <div class="bg-[#1a1f3a] border border-white/5 p-4 rounded-2xl rounded-tl-none flex items-center gap-1.5">
+                        <div class="w-2 h-2 bg-[#00d4ff] rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                        <div class="w-2 h-2 bg-[#00d4ff] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                        <div class="w-2 h-2 bg-[#00d4ff] rounded-full animate-bounce"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-6 bg-[#0a0e27]/50 border-t border-white/5">
+            <div class="flex gap-4">
+                <input 
+                    type="text" 
+                    id="chatInput" 
+                    placeholder="Ask about career paths, skills, or your goals..." 
+                    class="flex-1 bg-[#1a1f3a] border border-[#00d4ff]/30 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-[#00d4ff] transition-all"
+                >
+                <button 
+                    onclick="sendChatMessage()" 
+                    class="bg-[#00d4ff] hover:bg-[#0099cc] text-[#0a0e27] font-bold px-8 py-4 rounded-xl transition-all"
+                >
+                    Send
+                </button>
+            </div>
+            <p class="text-[10px] text-gray-500 mt-4 text-center">
+                {{ user.education or 'N/A' }} | CGPA: {{ user.cgpa or 'N/A' }} | {{ user.college or 'N/A' }}
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    async function sendChatMessage() {
+        const input = document.getElementById('chatInput');
+        const container = document.getElementById('chatContainer');
+        const loader = document.getElementById('loadingIndicator');
+        const message = input.value.trim();
+        
+        if (!message) return;
+
+        // 1. Append User Message
+        appendMessage('U', message, 'user');
+        input.value = '';
+
+        // 2. Show Loading Bubble at the bottom
+        container.appendChild(loader);
+        loader.classList.remove('hidden');
+        container.scrollTop = container.scrollHeight;
+
+        try {
+            // 3. Call your Flask API
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: message })
+            });
+
+            const data = await response.json();
+            
+            // 4. Hide Loader and Append AI Response
+            loader.classList.add('hidden');
+            appendMessage('AI', data.response, 'ai');
+        } catch (error) {
+            console.error('Error:', error);
+            loader.classList.add('hidden');
+            appendMessage('AI', "The server is taking a bit long to respond. Please try again in a few seconds.", 'ai');
+        }
+    }
+
+    function appendMessage(label, text, type) {
+        const container = document.getElementById('chatContainer');
+        const wrapper = document.createElement('div');
+        wrapper.className = `flex ${type === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in mb-4`;
+
+        const content = `
+            <div class="flex gap-3 max-w-[80%] ${type === 'user' ? 'flex-row-reverse' : ''}">
+                <div class="w-8 h-8 rounded-full ${type === 'user' ? 'bg-blue-600' : 'bg-[#00d4ff]'} flex items-center justify-center text-xs font-bold shrink-0 text-white">
+                    ${label}
+                </div>
+                <div class="${type === 'user' ? 'bg-blue-600/20 border-blue-600/30' : 'bg-[#1a1f3a] border-white/5'} p-4 rounded-2xl ${type === 'user' ? 'rounded-tr-none' : 'rounded-tl-none'} border text-sm leading-relaxed text-gray-200">
+                    ${text}
+                </div>
+            </div>
+        `;
+
+        wrapper.innerHTML = content;
+        container.appendChild(wrapper);
+        container.scrollTop = container.scrollHeight;
+    }
+
+    // Enter key support
+    document.getElementById('chatInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendChatMessage();
+    });
+</script>
+{% endblock %}

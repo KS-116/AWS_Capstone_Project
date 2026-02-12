@@ -1,0 +1,22 @@
+{
+  "AI Engineer": {
+    "skills": ["Python", "PyTorch", "Prompt Engineering", "RAG Frameworks", "Vector Databases"],
+    "roadmap": ["Month 1: Advanced Python & Math Foundations", "Month 2: Machine Learning Fundamentals", "Month 3: Deep Learning & Neural Networks", "Month 4: LLMs & NLP Techniques", "Month 5: MLOps & Model Deployment", "Month 6: End-to-End AI Application Project"]
+  },
+  "Full-Stack Developer": {
+    "skills": ["React/Next.js", "Node.js", "TypeScript", "GraphQL", "Docker & Kubernetes"],
+    "roadmap": ["Month 1: TypeScript & Modern JavaScript", "Month 2: React & Next.js Mastery", "Month 3: Backend with Node.js & APIs", "Month 4: Database Design & GraphQL", "Month 5: DevOps & Container Orchestration", "Month 6: Full-Stack Production Application"]
+  },
+  "Cybersecurity Analyst": {
+    "skills": ["Security Information & Event Management (SIEM)", "Penetration Testing", "Cloud Security (AWS/Azure)", "Threat Intelligence", "Zero Trust Architecture"],
+    "roadmap": ["Month 1: Networking & Security Fundamentals", "Month 2: SIEM Tools & Log Analysis", "Month 3: Ethical Hacking & Penetration Testing", "Month 4: Cloud Security Best Practices", "Month 5: Incident Response & Threat Hunting", "Month 6: Security Certification & Capstone"]
+  },
+  "Data Scientist": {
+    "skills": ["Python (Pandas, NumPy)", "Statistical Analysis & A/B Testing", "Machine Learning Algorithms", "SQL & Big Data Tools", "Data Visualization (Tableau, Power BI)"],
+    "roadmap": ["Month 1: Python for Data Analysis", "Month 2: Statistics & Probability", "Month 3: Machine Learning Algorithms", "Month 4: SQL & Database Management", "Month 5: Big Data & Spark Fundamentals", "Month 6: Real-World Data Science Project"]
+  },
+  "Cloud Architect": {
+    "skills": ["AWS/Azure/GCP Architecture", "Infrastructure as Code (Terraform)", "Microservices & Serverless", "Cloud Security & Compliance", "Cost Optimization Strategies"],
+    "roadmap": ["Month 1: Cloud Fundamentals & Core Services", "Month 2: Infrastructure as Code with Terraform", "Month 3: Microservices Architecture Design", "Month 4: Serverless Computing & Functions", "Month 5: Cloud Security & Governance", "Month 6: Multi-Cloud Architecture Project"]
+  }
+}
